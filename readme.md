@@ -10,9 +10,13 @@
 
 MyProject/
 ── README.md                 # Инструкции по проекту
+
 ── MyProject.API/            # Слой Web API
+
 ── MyProject.Application/    # Бизнес-логика
+
 ── MyProject.Domain/         # Доменные модели
+
 ── MyProject.Infrastructure/ # Данные и внешние сервисы
 
 
@@ -133,6 +137,7 @@ if (app.Environment.IsDevelopment())
 dotnet add package "Microsoft.Extensions.DependencyInjection.Abstractions" --version "9.0.7"
 Для использования IConfiguration
 dotnet add package "Microsoft.Extensions.Configuration" --version "9.0.7"
+
 
 
 
