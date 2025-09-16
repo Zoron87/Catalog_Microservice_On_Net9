@@ -37,7 +37,7 @@ jobs:
         fi
 
     - name: Pack
-      run: dotnet pack Template.csproj --configuration Release # Сборка NuGet-пакет в Release-режиме
+      run: dotnet pack Template.csproj --configuration Release --no-build # Сборка NuGet-пакет в Release-режиме
 
     # Указание источника пакетов GitHub 
     # и публикация собранного NuGet-пакета
