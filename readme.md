@@ -41,6 +41,7 @@ dotnet nuget add source https://nuget.pkg.github.com/Zoron87/index.json \
   
 2. Установить шаблон
 dotnet new install Zoron.cleanarchitecture.template
+
 3. Использовать шаблон
 # Создать новый проект
 dotnet new Capi -n MyMicroservice
@@ -74,8 +75,11 @@ git commit -m "Update template: добавлена новая функциона
 git push origin main
 
 # Создать и запушить тег версии
+
 git tag v1.0.0
+
 git push origin v1.0.0
+
 Автоматическая публикация
 GitHub Actions автоматически опубликует пакет в GitHub Packages при создании тега.
 
@@ -137,6 +141,7 @@ if (app.Environment.IsDevelopment())
 dotnet add package "Microsoft.Extensions.DependencyInjection.Abstractions" --version "9.0.7"
 Для использования IConfiguration
 dotnet add package "Microsoft.Extensions.Configuration" --version "9.0.7"
+
 
 
 
