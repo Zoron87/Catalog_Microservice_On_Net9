@@ -1,7 +1,7 @@
 .NET Clean Architecture Template
 Готовый к использованию шаблон для создания микросервисов на .NET с архитектурой Clean Architecture.
 
-Сергей Камянецкий
+Николай Сыряев
 👨‍💻 GitHub: @Zoron87
 💬 Telegram: @ZoronAds
 
@@ -14,6 +14,7 @@ MyProject/
 ├── MyProject.Application/    # Бизнес-логика
 ├── MyProject.Domain/         # Доменные модели
 └── MyProject.Infrastructure/ # Данные и внешние сервисы
+
 
 🚀 Быстрый старт
 1. Добавить источник GitHub Packages
@@ -132,3 +133,4 @@ if (app.Environment.IsDevelopment())
 dotnet add package "Microsoft.Extensions.DependencyInjection.Abstractions" --version "9.0.7"
 Для использования IConfiguration
 dotnet add package "Microsoft.Extensions.Configuration" --version "9.0.7"
+
