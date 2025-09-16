@@ -24,6 +24,18 @@ jobs:
       with:
         dotnet-version: '9.x.x' # Установка .NET 9
 
+    - name: Verify project structure
+      run: |
+        pwd
+        ls -la
+        echo "Checking if Template.csproj exists:"
+        if [ -f "Template.csproj" ]; then
+          echo "Template.csproj found!"
+        else
+          echo "Template.csproj NOT found!"
+          exit 1
+        fi
+
     - name: Pack
       run: dotnet pack Template.csproj --configuration Release # Сборка NuGet-пакет в Release-режиме
 
