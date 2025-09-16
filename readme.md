@@ -2,10 +2,10 @@
 
 Готовый к использованию шаблон для создания микросервисов на .NET с архитектурой Clean Architecture.
 
-### Сергей Камянецкий
+### Николай Сыряев
 
-**👨‍💻 GitHub:** [@iksergey](https://github.com/iksergey)  
-**💬 Telegram:** [@iksergey](https://t.me/iksergey)
+**👨‍💻 GitHub:** [@Zoron87](https://github.com/Zoron87)  
+**💬 Telegram:** [@ZoronAds](https://t.me/ZoronAds)
 
 ## 📋 Что создаёт шаблон
 
@@ -38,17 +38,17 @@ dotnet nuget add source https://nuget.pkg.github.com/<GITHUB_USERNAME>/index.jso
 
 ### Конкретный пример
 ```bash
-dotnet nuget add source https://nuget.pkg.github.com/iksergey/index.json \
-  --name github-iksergey \
-  --username iksergey \
-  --password PCH2Y60YqR7qg8lfyZcjCP3BQ4yr \
+dotnet nuget add source https://nuget.pkg.github.com/Zoron87/index.json \
+  --name github-Zoron87 \
+  --username Zoron87 \
+  --password PCH2Y60YqR7qg8lffghyZcjCP3BQ4yr \
   --store-password-in-clear-text
 ```
 
 ### 2. Установить шаблон
 
 ```bash
-dotnet new install iksergey.cleanarchitecture.template
+dotnet new install Zoron.cleanarchitecture.template
 ```
 
 ### 3. Использовать шаблон
@@ -71,15 +71,15 @@ dotnet run --project MyMicroservice.API
   ```
 - Обновить шаблон:
   ```bash
-  dotnet new install iksergey.cleanarchitecture.template --force
+  dotnet new install Zoron.cleanarchitecture.template --force
   ```
 - Удалить шаблон:
   ```bash
-  dotnet new uninstall iksergey.cleanarchitecture.template
+  dotnet new uninstall Zoron.cleanarchitecture.template
   ```
 - Удалить источник:
   ```bash
-  dotnet nuget remove source github-iksergey
+  dotnet nuget remove source github-Zoron87
   ```
 
 ## 📚 Дополнительные команды
@@ -115,7 +115,7 @@ dotnet nuget list source
 
 ```bash
 # Клонировать репозиторий
-git clone https://github.com/iksergey/dotnet-clean-architecture-template.git
+git clone https://github.com/Zoron87/Catalog_Microservice_On_Net9.git
 cd dotnet-clean-architecture-template
 
 # Установить локально для тестирования
@@ -198,8 +198,3 @@ dotnet add package "Microsoft.Extensions.DependencyInjection.Abstractions" --ver
 ```bash
 dotnet add package "Microsoft.Extensions.Configuration" --version "9.0.7"
 ```
-
-**Основные исправления:**
-- Исправлены орфографические и пунктуационные ошибки.
-- Приведена единая терминология и структура.
-- Уточнены формулировки и форматирование для лучшей читаемости.
