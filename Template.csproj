@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <PackageType>Template</PackageType>
+    <PackageVersion>1.0.0</PackageVersion>
+    <PackageId>Zoron.cleanarchitecture.template</PackageId>
+    <Title>Clean Architecture Project Template</Title>
+    <Authors>Nikolay Syryaev</Authors>
+    <Description>Clean Architecture template for microservices with API, Application, Core and Infrastructure layers</Description>
+    <PackageTags>dotnet-new;templates;cleanarchitecture;webapi;microservice</PackageTags>
+    <TargetFramework>net9.0</TargetFramework>
+    <IncludeContentInPack>true</IncludeContentInPack>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <ContentTargetFolders>content</ContentTargetFolders>
+    <NoWarn>$(NoWarn);NU5128</NoWarn>
+    <RepositoryUrl>https://github.com/Zoron87/Catalog_Microservice_On_Net9/</RepositoryUrl>
+    <PackageLicenseExpression>empty</PackageLicenseExpression>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Capi.API\DependencyInjection.cs" />
+    <Content Include="working\content\**" Exclude="working\content\**\bin\**;working\content\**\obj\**" />
+    <Compile Remove="**\*" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Capi.API\DependencyInjection.cs" />
+    <Compile Include="Capi.API\GlobalUsings.cs" />
+    <Compile Include="Capi.API\Program.cs" />
+    <Compile Include="Capi.Application\DependencyInjection.cs" />
+    <Compile Include="Capi.Application\GlobalUsings.cs" />
+    <Compile Include="Capi.Infrastructure\DependencyInjection.cs" />
+    <Compile Include="Capi.Infrastructure\GlobalUsings.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Capi.API\Capi.API.csproj" />
+    <None Include="Capi.Application\Capi.Application.csproj" />
+    <None Include="Capi.Domain\Capi.Domain.csproj" />
+    <None Include="Capi.Infrastructure\Capi.Infrastructure.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Routing" Version="2.3.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.9" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.9" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.9" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.4" />
+  </ItemGroup>
+</Project>
