@@ -1,7 +1,6 @@
-﻿namespace Capi.Domain.Entities
+﻿namespace Capi.Domain.Entities;
+
+public class Brand : BaseEntity
 {
-    public class Brand : BaseEntity
-    {
-        public string? Title { get; set; }
-    }
+    public string? Title { get; set; }
 }

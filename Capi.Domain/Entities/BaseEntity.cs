@@ -1,7 +1,6 @@
-﻿namespace Capi.Domain.Entities
+﻿namespace Capi.Domain.Entities;
+
+public class BaseEntity
 {
-    public class BaseEntity
-    {
-        public Guid Id { get; set; }
-    }
+    public Guid Id { get; set; }
 }

@@ -1,7 +1,6 @@
-﻿namespace Capi.Domain.Repositories
+﻿namespace Capi.Domain.Repositories;
+
+public interface ICategoryRepository
 {
-    public interface ICategoryRepository
-    {
-        Task<IEnumerable<Category>> GetAllGategoriesAsync();
-    }
+    Task<IEnumerable<Category>> GetAllGategoriesAsync();
 }

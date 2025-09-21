@@ -1,7 +1,6 @@
-﻿namespace Capi.Domain.Repositories
+﻿namespace Capi.Domain.Repositories;
+
+public interface IBrandRepository
 {
-    public interface IBrandRepository
-    {
-        Task<IEnumerable<Brand>> GetAllBrandsAsync();
-    }
+    Task<IEnumerable<Brand>> GetAllBrandsAsync();
 }

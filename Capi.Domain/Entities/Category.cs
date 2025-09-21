@@ -1,7 +1,6 @@
-﻿namespace Capi.Domain.Entities
+﻿namespace Capi.Domain.Entities;
+
+public class Category : BaseEntity
 {
-    public class Category : BaseEntity
-    {
-        public string? Title { get; set; }
-    }
+    public string? Title { get; set; }
 }
