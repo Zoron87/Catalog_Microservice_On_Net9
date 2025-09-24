@@ -2,5 +2,5 @@
 
 public interface IBrandRepository
 {
-    Task<IEnumerable<Brand>> GetAllBrandsAsync(CancellationToken ct);
+    Task<IEnumerable<Brand>> GetAllBrandsAsync(CancellationToken ct = default);
 }

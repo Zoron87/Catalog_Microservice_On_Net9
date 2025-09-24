@@ -16,52 +16,52 @@ public class CatalogRepository
     }
 
     // IBrandRepository
-    public async Task<IEnumerable<Brand>> GetAllBrandsAsync()
+    public async Task<IEnumerable<Brand>> GetAllBrandsAsync(CancellationToken ct)
     {
-        return await _session.Query<Brand>().OrderBy(r => r.Title).ToListAsync();
+        return await _session.Query<Brand>().OrderBy(r => r.Title).ToListAsync(ct);
     }
 
     // ICategoryRepository
-    public async Task<IEnumerable<Category>> GetAllGategoriesAsync()
+    public async Task<IEnumerable<Category>> GetAllGategoriesAsync(CancellationToken ct)
     {
-        return await _session.Query<Category>().ToListAsync();
+        return await _session.Query<Category>().ToListAsync(ct);
     }
 
     // ICatalogItemRepository
-    public async Task<IEnumerable<CatalogItem>> GetAllCatalogItemAsync()
+    public async Task<IEnumerable<CatalogItem>> GetAllCatalogItemAsync(CancellationToken ct)
     {
-        return await _session.Query<CatalogItem>().ToListAsync();
+        return await _session.Query<CatalogItem>().ToListAsync(ct);
     }
 
-    public Task<CatalogItem?> GetCatalogItemAsync(Guid id)
+    public Task<CatalogItem?> GetCatalogItemAsync(Guid id, CancellationToken ct)
     {
-        return _session.LoadAsync<CatalogItem>(id);
+        return _session.LoadAsync<CatalogItem>(id, ct);
     }
 
-    public async Task<IEnumerable<CatalogItem>> GetCatalogItemsByBrandAsync(string brandTitle)
+    public async Task<IEnumerable<CatalogItem>> GetCatalogItemsByBrandAsync(string brandTitle, CancellationToken ct)
     {
         return await _session.Query<CatalogItem>().Where
             (r => r.Brand != null 
                 && !String.IsNullOrWhiteSpace(r.Brand.Title)
                 && r.Brand.Title.Equals(brandTitle, StringComparison.OrdinalIgnoreCase))
-            .ToListAsync();
+            .ToListAsync(ct);
     }
 
-    public async Task<IEnumerable<CatalogItem>> GetCatalogItemsByTitleAsync(string title)
+    public async Task<IEnumerable<CatalogItem>> GetCatalogItemsByTitleAsync(string title, CancellationToken ct)
     {
         return await _session.Query<CatalogItem>().Where
             (r => r.Brand != null
                 && !String.IsNullOrWhiteSpace(r.Title)
                 && r.Brand.Title!.Equals(title, StringComparison.OrdinalIgnoreCase))
-            .ToListAsync();
+            .ToListAsync(ct);
     }
 
-    public async Task<CatalogItem> CreateCatalogItemAsync(CatalogItem item)
+    public async Task<CatalogItem> CreateCatalogItemAsync(CatalogItem item, CancellationToken ct)
     {
         try
         {
             _session.Store(item);
-            await _session.SaveChangesAsync();
+            await _session.SaveChangesAsync(ct);
             return item;
         }
         catch (Exception ex)
@@ -71,13 +71,13 @@ public class CatalogRepository
         }
     }
 
-    public async Task<bool> DeleteCatalogItemAsync(Guid id)
+    public async Task<bool> DeleteCatalogItemAsync(Guid id, CancellationToken ct)
     {
         try
         {
             var item = _session.Query<CatalogItem>().Where(r => r.Id == id);
             _session.Delete<CatalogItem>(id);
-            await _session.SaveChangesAsync();
+            await _session.SaveChangesAsync(ct);
             return true;
         }
         catch (Exception ex)
@@ -87,12 +87,12 @@ public class CatalogRepository
         }
     }
 
-    public async Task<bool> UpdateCatalogItemAsync(CatalogItem item)
+    public async Task<bool> UpdateCatalogItemAsync(CatalogItem item, CancellationToken ct)
     {
         try
         { 
             _session.Store(item);
-            await _session.SaveChangesAsync();
+            await _session.SaveChangesAsync(ct);
             return true;
         }
         catch (Exception ex)
