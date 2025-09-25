@@ -9,8 +9,10 @@ public static class DependencyInjection
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
 
+        var licenceKey = configuration.GetSection("MediatR:LicenseKey").Value;
         services.AddMediatR(cfg =>
         {
+            cfg.LicenseKey = licenceKey;
             cfg.RegisterServicesFromAssemblyContaining<GetBrandsQuery>();
         });
 
