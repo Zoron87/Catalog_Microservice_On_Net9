@@ -1,7 +1,10 @@
-﻿namespace Capi.API.Controllers;
+﻿using Asp.Versioning;
 
+namespace Capi.API.Controllers;
+
+[ApiVersion("1")]
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/v{version:apiVersion}/[controller]")]
 public class ApiController : ControllerBase
 {
     private IMediator? mediator;

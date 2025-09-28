@@ -1,3 +1,4 @@
+using Asp.Versioning;
 using Capi.Application.Queries.BrandQueries;
 
 namespace Template.Capi.API;
@@ -5,9 +6,28 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddApiServices(this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddApiVersioning(options =>
+        {
+            options.ReportApiVersions = true;
+            options.AssumeDefaultVersionWhenUnspecified = true;
+            options.DefaultApiVersion = new ApiVersion(1, 0);
+        })
+        .AddApiExplorer(options =>
+        {
+            options.GroupNameFormat = "'v'VVV"; // v1
+            options.SubstituteApiVersionInUrl = true;
+        });
+
         services.AddControllers();
         services.AddEndpointsApiExplorer();
-        services.AddSwaggerGen();
+        services.AddSwaggerGen(config =>
+        {
+            config.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+            {
+                Title = "Catalog API",
+                Version = "v1"
+            });
+        });
 
         var licenceKey = configuration.GetSection("MediatR:LicenseKey").Value;
         services.AddMediatR(cfg =>
