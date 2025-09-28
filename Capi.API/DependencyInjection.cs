@@ -1,5 +1,6 @@
 using Asp.Versioning;
 using Capi.Application.Queries.BrandQueries;
+using Capi.Application.Queries.CatalogItemsQueries;
 
 namespace Template.Capi.API;
 public static class DependencyInjection

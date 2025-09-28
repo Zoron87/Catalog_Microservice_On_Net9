@@ -12,7 +12,6 @@ public class GetBrandsQueryHandler(IBrandRepository brandRepository)
     public async Task<GetBrandsResult> Handle(GetBrandsQuery query, CancellationToken ct)
     {
         IEnumerable<Brand> brandList = await brandRepository.GetAllBrandsAsync(ct);
-        GetBrandsResult result = new(brandList);
-        return result;
+        return new(brandList);
     }
 }

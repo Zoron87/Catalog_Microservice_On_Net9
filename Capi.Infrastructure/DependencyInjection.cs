@@ -17,7 +17,7 @@ public static class DependencyInjection
 
         services.AddScoped<IBrandRepository, CatalogRepository>();
         services.AddScoped<ICategoryRepository, CatalogRepository>();
-        services.AddScoped<ICategoryRepository, CatalogRepository>();
+        services.AddScoped<ICatalogItemRepository, CatalogRepository>();
 
         return services;
     }
