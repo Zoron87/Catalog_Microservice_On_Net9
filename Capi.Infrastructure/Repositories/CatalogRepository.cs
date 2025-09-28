@@ -52,7 +52,7 @@ public class CatalogRepository
         return await _session.Query<CatalogItem>().Where
             (r => r.Brand != null
                 && !String.IsNullOrWhiteSpace(r.Title)
-                && r.Brand.Title!.Equals(title, StringComparison.OrdinalIgnoreCase))
+                && r.Brand.Title!.Contains(title, StringComparison.OrdinalIgnoreCase))
             .ToListAsync(ct);
     }
 
