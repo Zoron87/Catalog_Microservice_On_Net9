@@ -3,7 +3,7 @@ using Capi.Application.Responses.CatalogItemResponses;
 using Capi.Domain.Repositories;
 using MediatR;
 
-namespace Capi.Application.Handlers.CatalogItemsQueryHandlers;
+namespace Capi.Application.Handlers.CatalogItemsHandlers;
 
 public class GetCatalogItemByIdQueryHandler(ICatalogItemRepository catalogItemRepository)
     : IRequestHandler<GetCatalogItemByIdQuery, GetCatalogItemByIdResult>

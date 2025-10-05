@@ -1,5 +1,5 @@
-﻿using Capi.Application.Queries.CatalogItemsQueries;
-using Capi.Application.Queries.CategoryQueries;
+﻿using Capi.Application.Commands.CatalogItemCommands;
+using Capi.Application.Queries.CatalogItemsQueries;
 using Capi.Application.Responses.CatalogItemResponses;
 using System.Net;
 
@@ -29,5 +29,14 @@ public class CatalogItemController : ApiController
     {
         var result = await Mediator.Send(new GetCatalogItemsByTitleQuery(catalogItemTitle));
         return Ok(result);
+    }
+
+    [HttpPost]
+    [ProducesResponseType(typeof(CreateCatalogItemResult), StatusCodes.Status201Created)]
+    public async Task<ActionResult<CreateCatalogItemResult>> CreateCatalogItem
+        ([FromBody] CreateCatalogItemCommand command)
+    {
+        var result = await Mediator.Send(command);
+        return CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
     }
 }
