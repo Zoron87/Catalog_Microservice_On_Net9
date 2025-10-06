@@ -1,4 +1,5 @@
 ﻿using Capi.Application.Commands.CatalogItemCommands;
+using Capi.Application.Models;
 using Capi.Application.Responses.CatalogItemResponses;
 using Capi.Domain.Entities;
 using Capi.Domain.Repositories;
@@ -15,6 +16,8 @@ public class CreateCatalogItemHandler(ICatalogItemRepository catalogItemReposito
         var catalogItem = command.Adapt<CatalogItem>();
         catalogItem.Id = Guid.NewGuid();
         await catalogItemRepository.CreateCatalogItemAsync(catalogItem);
+
+        //var dto = catalogItem.Adapt<CreateCatalogItemDTO>();
         return new CreateCatalogItemResult(catalogItem.Id);
     }
 }

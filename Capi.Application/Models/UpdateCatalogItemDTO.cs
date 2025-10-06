@@ -2,7 +2,8 @@
 
 namespace Capi.Application.Models;
 
-public record CreateCatalogItemDTO(
+public record UpdateCatalogItemDTO(
+    Guid Id,
     string? Title,
     string? ShortDescription,
     string? FullDescription,

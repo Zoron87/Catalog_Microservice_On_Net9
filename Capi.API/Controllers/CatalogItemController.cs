@@ -39,4 +39,13 @@ public class CatalogItemController : ApiController
         var result = await Mediator.Send(command);
         return CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
     }
+
+    [HttpPut]
+    [ProducesResponseType(typeof(UpdateCatalogItemResult), (int)HttpStatusCode.OK)]
+    public async Task<ActionResult<UpdateCatalogItemResult>> UpdateCatalogItem
+        ([FromBody] UpdateCatalogItemCommand command)
+    {
+        var result = await Mediator.Send(command);
+        return Ok(result);
+    }
 }
