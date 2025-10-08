@@ -28,6 +28,13 @@ public static class DependencyInjection
                 Title = "Catalog API",
                 Version = "v1"
             });
+            config.SwaggerDoc("v2", new Microsoft.OpenApi.Models.OpenApiInfo
+            {
+                Title = "Catalog API",
+                Version = "v2"
+            });
+
+            config.EnableAnnotations();
         });
 
         var licenceKey = configuration.GetSection("MediatR:LicenseKey").Value;
@@ -46,7 +53,13 @@ public static class DependencyInjection
         //if (app.Environment.IsDevelopment())
         {
             app.UseSwagger();
-            app.UseSwaggerUI();
+            app.UseSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "Catalog API V1");
+                options.SwaggerEndpoint("/swagger/v2/swagger.json", "Catalog API V2");
+            }
+                    
+            );
         }
 
         app.MapGet("/", () => "Hello World!");
