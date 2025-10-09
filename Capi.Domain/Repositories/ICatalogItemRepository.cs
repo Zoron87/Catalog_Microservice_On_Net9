@@ -1,4 +1,6 @@
-﻿namespace Capi.Domain.Repositories;
+﻿using Capi.Domain.Specifications;
+
+namespace Capi.Domain.Repositories;
 
 public interface ICatalogItemRepository
 {
@@ -9,4 +11,5 @@ public interface ICatalogItemRepository
     Task<IEnumerable<CatalogItem>> GetCatalogItemsByBrandAsync(string brandTitle, CancellationToken ct = default);
     Task<bool> UpdateCatalogItemAsync(CatalogItem item, CancellationToken ct = default);
     Task<bool> DeleteCatalogItemAsync(Guid id, CancellationToken ct = default);
+    Task<Pagination<CatalogItem>> GetCatalogItemsAsync(QueryArgs args, CancellationToken ct = default);
 }

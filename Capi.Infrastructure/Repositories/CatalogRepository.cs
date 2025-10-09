@@ -1,5 +1,6 @@
 ﻿using Capi.Domain.Entities;
 using Capi.Domain.Repositories;
+using Capi.Domain.Specifications;
 using Marten;
 
 namespace Capi.Infrastructure.Repositories;
@@ -100,5 +101,45 @@ public class CatalogRepository
             // logger
             return false;
         }
+    }
+
+    public async Task<Pagination<CatalogItem>> GetCatalogItemsAsync(QueryArgs args, CancellationToken ct)
+    {
+        var allItems = _session.Query<CatalogItem>().AsQueryable();
+
+        var brandId = args.BrandId;
+        if (brandId is not null)
+            allItems.Where(e => e.Brand != null
+                           && e.Brand.Id == brandId);
+
+        var categoryId = args.CategoryId;
+        if (categoryId is not null)
+            allItems.Where(e => e.Category != null
+                           && e.Category.Id == categoryId);
+
+        var search = args.Search;
+        if (!string.IsNullOrWhiteSpace(search))
+            allItems.Where(e => e.Title != null
+                           && e.Title.Contains(search, StringComparison.OrdinalIgnoreCase));
+
+        if (!string.IsNullOrWhiteSpace(args.Sort))
+        {
+            allItems = args.Sort.ToLower() switch
+            {
+                "price_desc" => allItems.OrderByDescending(x => x.Price),
+                "price_asc" => allItems.OrderBy(x => x.Price),
+                "title_desc" => allItems.OrderByDescending(x => x.Title),
+                "title_asc" => allItems.OrderBy(x => x.Title),
+                _ => allItems
+            };
+        }
+
+        var count = await allItems.CountAsync();
+        var items = await allItems
+            .Skip((args.PageIndex - 1) * args.PageSize)
+            .Take(args.PageSize)
+            .ToListAsync();
+
+       return new Pagination<CatalogItem>(args.PageIndex, args.PageSize, count, items);
     }
 }
