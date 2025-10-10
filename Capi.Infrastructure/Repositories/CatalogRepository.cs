@@ -67,7 +67,6 @@ public class CatalogRepository
         }
         catch (Exception ex)
         {
-            // logger
             throw;
         }
     }
@@ -83,7 +82,6 @@ public class CatalogRepository
         }
         catch (Exception ex)
         {
-            // logger
             return false;
         }
     }
@@ -98,7 +96,6 @@ public class CatalogRepository
         }
         catch (Exception ex)
         {
-            // logger
             return false;
         }
     }

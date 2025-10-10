@@ -35,6 +35,8 @@ public static class DependencyInjection
             });
 
             config.EnableAnnotations();
+            var basePath = AppContext.BaseDirectory;
+            config.IncludeXmlComments(Path.Combine(basePath, "Capi.Domain.xml"));
         });
 
         var licenceKey = configuration.GetSection("MediatR:LicenseKey").Value;
