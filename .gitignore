@@ -13,6 +13,9 @@
 *.userosscache
 *.sln.docstates
 *.dockerignore
+**/.docker/
+**/.dockerenv
+docker-compose.override.yml
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
