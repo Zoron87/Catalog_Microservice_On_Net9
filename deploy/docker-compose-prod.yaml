@@ -1,4 +1,4 @@
-#docker compose -f docker-compose-prod.yaml up -d
+#docker compose --project-directory . -f deploy\docker-compose-prod.yaml up -d
 
 services:
     catalog_db:

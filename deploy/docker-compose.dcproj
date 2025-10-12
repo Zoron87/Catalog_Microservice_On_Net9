@@ -11,5 +11,8 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include=".dockerignore" />
+    <None Include="docker-compose-dev.yaml" />
+    <None Include="docker-compose-prod.yaml" />
+    <None Include="docker-compose.yml" />
   </ItemGroup>
 </Project>

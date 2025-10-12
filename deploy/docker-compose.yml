@@ -18,4 +18,3 @@ services:
             - postgres_catalog:/var/lib/postgresql/data/
 volumes:
     postgres_catalog:    
-    

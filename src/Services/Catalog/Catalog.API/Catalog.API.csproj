@@ -25,7 +25,7 @@
 	<UserSecretsId>4db47335-3dd7-4241-8d2a-04f39ee3bad5</UserSecretsId>
 	<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 	<DockerfileContext>..\..\..\..</DockerfileContext>
-	<DockerComposeProjectPath>..\..\..\..\docker-compose.dcproj</DockerComposeProjectPath>
+	<DockerComposeProjectPath>..\..\..\..\deploy\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
 </Project>
