@@ -16,11 +16,11 @@ public class CustomExceptionHandler : IExceptionHandler
         };
 
         httpContext.Response.StatusCode = statusCode;
-        var problemDetails = new ProblemDetails
+        var problemDetails = new ProblemDetails 
         {
             Title = title,
             Detail = detail,
-            Status = StatusCodes.Status500InternalServerError,
+            Status = statusCode,
             Instance = httpContext.Request.Path
         };
         problemDetails.Extensions.Add("traceId", httpContext.TraceIdentifier);

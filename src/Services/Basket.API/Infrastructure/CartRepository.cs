@@ -1,4 +1,5 @@
 ﻿using Basket.API.Models;
+using Common.Kernel.Exceptions.Handler;
 using Marten;
 
 namespace Basket.API.Infrastructure;
@@ -9,7 +10,7 @@ public class CartRepository (IDocumentSession session) : ICartRepository
     {
         var cart = await session.LoadAsync<ShoppingCart>(accountName, ct);
         if (cart is null)
-            throw new ArgumentNullException($"Корзины для {accountName} не найдено");
+            throw new CartNotFoundException(accountName);
 
         return cart;
     }
@@ -18,7 +19,7 @@ public class CartRepository (IDocumentSession session) : ICartRepository
     {
         var cart = await session.LoadAsync<ShoppingCart>(accountName, ct);
         if (cart is null)
-            throw new ArgumentNullException($"Корзины для {accountName} не найдено");
+            throw new CartNotFoundException(accountName);
 
         session.Delete<ShoppingCart>(accountName);
         await session.SaveChangesAsync(ct);
