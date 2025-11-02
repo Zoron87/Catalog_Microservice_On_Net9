@@ -1,6 +1,7 @@
 ﻿using Basket.API.Infrastructure;
 using Basket.API.Models;
 using Carter;
+using Common.Kernel.Exceptions.Handler;
 using Marten;
 
 namespace Basket.API;
@@ -9,6 +10,7 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddApiServices(this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddExceptionHandler<CustomExceptionHandler>();
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
         services.AddCarter();
@@ -36,6 +38,7 @@ public static class DependencyInjection
 
     public static WebApplication UseApiServices(this WebApplication app)
     {
+        app.UseExceptionHandler(option => { });
         app.MapCarter();
         app.UseSwagger();
         app.UseSwaggerUI();
