@@ -9,7 +9,7 @@ public class SaveCartCommandValidator : AbstractValidator<SaveCartCommand>
     {
         RuleFor(x => x.Cart).NotNull().WithMessage("Не может быть null");
         RuleFor(x => x.Cart.AccountName).NotEmpty()
-            .WithMessage("AccuntName обязателен").MaximumLength(100).WithMessage("AccountName слишком длинный");
+            .WithMessage("AccountName обязателен").MaximumLength(100).WithMessage("AccountName слишком длинный");
         RuleFor(x => x.Cart.Items).NotEmpty().WithMessage("Корзина не может быть пустой");
 
         RuleForEach(x => x.Cart.Items).ChildRules(item =>
