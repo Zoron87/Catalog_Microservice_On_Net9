@@ -1,7 +1,9 @@
 ﻿using Basket.API.Infrastructure;
 using Basket.API.Models;
 using Carter;
+using Common.Kernel.Behaviors;
 using Common.Kernel.Exceptions.Handler;
+using FluentValidation;
 using Marten;
 
 namespace Basket.API;
@@ -22,7 +24,10 @@ public static class DependencyInjection
         {
             config.LicenseKey = licenseKey;
             config.RegisterServicesFromAssembly(assembly);
+            config.AddOpenBehavior(typeof(ValidationBehavior<,>));
         });
+
+        services.AddValidatorsFromAssembly(assembly);
 
         var connectionString = configuration.GetConnectionString("PgConnection")!;
         services.AddMarten(options =>
