@@ -51,7 +51,7 @@ public static class DependencyInjection
         //                                    )
         //        );
         services.AddScoped<ICartRepository, CartRepository>();
-        services.AddDecorator<ICartRepository, RedisCartCacheRepository>();
+        services.Decorate<ICartRepository, RedisCartCacheRepository>();
 
         return services;
     }
