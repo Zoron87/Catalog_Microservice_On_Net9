@@ -15,7 +15,7 @@ public class SaveCartEndpoint : ICarterModule
             var result = await sender.Send(command);
             var response = result.Adapt<SaveCartResponse>();
             //return Results.Created($"/cart/{response.AccountName}", response);
-            return Results.CreatedAtRoute("RetrieveCartResponse", new { accountName = response.AccountName }, response);
+            return Results.CreatedAtRoute("RetrieveCartEndpoint", new { accountName = response.AccountName }, response);
         })
         .WithName("SaveCartEndpoint")
         .Produces<SaveCartResponse>(StatusCodes.Status201Created)
