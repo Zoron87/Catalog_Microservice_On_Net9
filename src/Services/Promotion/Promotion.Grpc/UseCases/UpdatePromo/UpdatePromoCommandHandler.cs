@@ -1,4 +1,5 @@
 ﻿using Common.Kernel.CQRS.Commands;
+using Mapster;
 using Promotion.Grpc.Domain;
 using Promotion.Grpc.Persistance.Interfaces;
 using Promotion.Grpc.Protos;
@@ -10,12 +11,7 @@ public class UpdatePromoCommandHandler(IPromoRepository promoRepository) :
 {
     public async Task<UpdatePromoResponse> Handle(UpdatePromoCommand command, CancellationToken ct)
     {
-        var promo = new Promo()
-        {
-            Id = Guid.Parse(command.Promo.Id),
-            Title = command.Promo.Title,
-            Value = (decimal)command.Promo.Value
-        };
+        var promo = command.Promo.Adapt<Promo>();
 
         var result = await promoRepository.UpdateAsync(promo, ct);
 

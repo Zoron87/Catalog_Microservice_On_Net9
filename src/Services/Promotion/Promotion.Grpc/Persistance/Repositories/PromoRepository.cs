@@ -43,4 +43,17 @@ public class PromoRepository (IDbConnection connection) : IPromoRepository
         var result = await connection.ExecuteAsync(UpdatePromo, promo);
         return result > 0;
     }
+
+    public async Task<bool> DeleteByCatalogItemIdAsync(Promo? promo, CancellationToken ct)
+    {
+        ArgumentNullException.ThrowIfNull(promo);
+
+        const string query = """
+            DELETE FROM Promo
+            WHERE CatalogItemId = @CatalogItemId;
+        """;
+
+        var result = await connection.ExecuteAsync(query, promo);
+        return result > 0;
+    }
 }

@@ -1,4 +1,5 @@
 ﻿using Common.Kernel.CQRS.Commands;
+using Mapster;
 using Promotion.Grpc.Domain;
 using Promotion.Grpc.Persistance.Interfaces;
 using Promotion.Grpc.Protos;
@@ -10,13 +11,7 @@ public class CreatePromoCommandHandler(IPromoRepository repository) :
 {
     public async Task<CreatePromoResponse> Handle(CreatePromoCommand command, CancellationToken ct)
     {
-        var promo = new Promo
-        {
-            Id = Guid.NewGuid(),
-            CatalogItemId = command.Promo.CatalogItemId,
-            Title = command.Promo.Title,
-            Value = (decimal)command.Promo.Value,
-        };
+        var promo = command.Promo.Adapt<Promo>();
 
         var success = await repository.CreateAsync(promo, ct);
 

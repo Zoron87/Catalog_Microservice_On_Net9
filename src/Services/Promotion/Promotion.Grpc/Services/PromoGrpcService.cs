@@ -1,8 +1,9 @@
 ﻿using Grpc.Core;
 using MediatR;
 using Promotion.Grpc.Protos;
-using Promotion.Grpc.UseCases.GetPromo;
 using Promotion.Grpc.UseCases.CreatePromo;
+using Promotion.Grpc.UseCases.DeletePromo;
+using Promotion.Grpc.UseCases.GetPromo;
 using Promotion.Grpc.UseCases.UpdatePromo;
 
 namespace Promotion.Grpc.Services;
@@ -25,6 +26,13 @@ public class PromoGrpcService (IMediator mediator) : PromoService.PromoServiceBa
     public override async Task<UpdatePromoResponse> UpdatePromo(UpdatePromoRequest request, ServerCallContext context)
     {
         var command = new UpdatePromoCommand(request);
+        var result = await mediator.Send(command, context.CancellationToken);
+        return result;
+    }
+
+    public override async Task<DeletePromoResponse> DeletePromo(DeletePromoRequest request, ServerCallContext context)
+    {
+        var command = new DeletePromoCommand(request);
         var result = await mediator.Send(command, context.CancellationToken);
         return result;
     }
