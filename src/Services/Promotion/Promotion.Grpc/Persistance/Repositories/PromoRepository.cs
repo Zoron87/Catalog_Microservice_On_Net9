@@ -20,4 +20,27 @@ public class PromoRepository (IDbConnection connection) : IPromoRepository
                                                                       new { CatalogItemId = catalogItemId});
         return result;
     }
+
+    public async Task<bool> CreateAsync(Promo? promo, CancellationToken ct)
+    {
+        const string InsertPromo = """
+            INSERT INTO Promo (Id, CatalogItemId, Title, Value)
+            VALUES (@Id, @CatalogItemId, @Title, @Value);
+        """;
+
+        var result = await connection.ExecuteAsync(InsertPromo, promo);
+        return result > 0;
+    }
+
+    public async Task<bool> UpdateAsync(Promo? promo, CancellationToken ct)
+    {
+        const string UpdatePromo = """
+            UPDATE Promo SET 
+                Title = @Title, Value = @Value
+            WHERE Id = @Id;
+        """;
+
+        var result = await connection.ExecuteAsync(UpdatePromo, promo);
+        return result > 0;
+    }
 }

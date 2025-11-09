@@ -3,6 +3,4 @@ using Promotion.Grpc.Protos;
 
 namespace Promotion.Grpc.UseCases.GetPromo;
 
-public record GetPromoByCatalogItemIdQuery (String CatalogItemId) : IQuery<PromoModel>
-{
-}
+public record GetPromoByCatalogItemIdQuery (string CatalogItemId) : IQuery<PromoModel>;
