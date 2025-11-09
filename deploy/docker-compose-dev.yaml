@@ -37,7 +37,21 @@ services:
         volumes:
             - redis_basket:/data
 
+# promotion grpc
+    promotion_db:
+        container_name: promotion_db-dev
+        image: mysql:8.0
+        environment:
+            - MYSQL_ROOT_PASSWORD=12345678
+            - MYSQL_DATABASE=promotion-db
+        restart: always
+        ports:
+            - "7103:3306"
+        volumes:
+            - mysql_promotion:/var/lib/mysql
+
 volumes:
     postgres_catalog:    
     postgres_basket:
     redis_basket:
+    mysql_promotion:

@@ -5,7 +5,6 @@ using Common.Kernel.Behaviors;
 using Common.Kernel.Exceptions.Handler;
 using FluentValidation;
 using Marten;
-using Microsoft.Extensions.Caching.Distributed;
 
 namespace Basket.API;
 
