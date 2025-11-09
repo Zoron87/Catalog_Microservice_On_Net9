@@ -1,0 +1,18 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "Promotion.Grpc.Protos";
+
+service PromoService {
+	rpc GetPromo(GetPromoRequest) returns (PromoModel);
+}
+
+message GetPromoRequest {
+	string catalog_item_id = 1;
+}
+
+message PromoModel {
+	string id = 1;
+	string catalog_item_id = 2;
+	string title = 3;
+	double value = 4;
+}

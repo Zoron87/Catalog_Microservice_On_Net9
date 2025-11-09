@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Components.Forms;
 using MySqlConnector;
 using Promotion.Grpc.Persistance.Extensions;
+using Promotion.Grpc.Persistance.Interfaces;
+using Promotion.Grpc.Persistance.Repositories;
+using Promotion.Grpc.Services;
 using System.Data;
 using System.Threading.Tasks;
 
@@ -26,6 +29,7 @@ public static class DependencyInjection
             config.RegisterServicesFromAssembly(assembly);
         });
 
+        services.AddScoped<IPromoRepository, PromoRepository>();
         return services;
     }
 
@@ -36,7 +40,7 @@ public static class DependencyInjection
         await DatabaseExtensions.SeedAsync(connection);
 
         app.MapGrpcReflectionService();
-        app.MapGrpcService<GreeterService>();
+        app.MapGrpcService<PromoGrpcService>();
         return app;
     }
 }
