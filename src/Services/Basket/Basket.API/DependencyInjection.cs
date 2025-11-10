@@ -5,6 +5,7 @@ using Common.Kernel.Behaviors;
 using Common.Kernel.Exceptions.Handler;
 using FluentValidation;
 using Marten;
+using Promotion.Grpc.Protos;
 
 namespace Basket.API;
 
@@ -52,6 +53,11 @@ public static class DependencyInjection
         services.AddScoped<ICartRepository, CartRepository>();
         services.Decorate<ICartRepository, RedisCartCacheRepository>();
 
+        var promotionService = configuration.GetSection("GrpcServices:PromotionService").Value!;    
+        services.AddGrpcClient<PromoService.PromoServiceClient>(option =>
+        {
+            option.Address = new Uri(promotionService);
+        });
         return services;
     }
 
