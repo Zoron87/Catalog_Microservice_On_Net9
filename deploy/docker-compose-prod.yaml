@@ -1,4 +1,4 @@
-#docker compose --project-directory . -f deploy\docker-compose-prod.yaml up -d
+#docker compose --project-directory . -f deploy\docker-compose-prod.yaml up -d --build
 
 services:
     catalog_db:
@@ -67,6 +67,7 @@ services:
         depends_on:
           - basket_db
           - basket_redis
+          - promotion_api
         restart: unless-stopped
 
 # promotion grpc

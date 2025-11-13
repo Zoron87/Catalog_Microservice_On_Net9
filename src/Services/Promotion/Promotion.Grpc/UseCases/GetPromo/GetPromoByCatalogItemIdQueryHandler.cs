@@ -15,10 +15,11 @@ public class GetPromoByCatalogItemIdQueryHandler(IPromoRepository repository)
 
         if (promo is null)
         {
-            throw new RpcException(
-                new Status(StatusCode.NotFound,
-                $"Ничего для {query.CatalogItemId} не найдено")
-                );
+            return new PromoModel()
+            {
+                CatalogItemId = query.CatalogItemId,
+                Value = 0
+            };
         }
 
         return promo.Adapt<PromoModel>();

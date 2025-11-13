@@ -16,18 +16,22 @@ WORKDIR /src
 
 COPY ["src/Services/Basket/Basket.API/Basket.API.csproj", "src/Services/Basket/Basket.API/"]
 COPY ["src/Shared/Common.Kernel/Common.Kernel.csproj", "src/Shared/Common.Kernel/"]
+COPY ["src/Services/Catalog/Catalog.API/Catalog.API.csproj",                 "src/Services/Catalog/Catalog.API/"]
+COPY ["src/Services/Catalog/Catalog.Application/Catalog.Application.csproj", "src/Services/Catalog/Catalog.Application/"]
+COPY ["src/Services/Catalog/Catalog.Domain/Catalog.Domain.csproj",           "src/Services/Catalog/Catalog.Domain/"]
+COPY ["src/Services/Catalog/Catalog.Infrastructure/Catalog.Infrastructure.csproj", "src/Services/Catalog/Catalog.Infrastructure/"]
+COPY ["src/Services/Promotion/Promotion.Grpc/Promotion.Grpc.csproj", "src/Services/Promotion/Promotion.Grpc/"]
 
 RUN dotnet restore "src/Services/Basket/Basket.API/Basket.API.csproj"
 
-# Копируем ТОЛЬКО код Basket.API и Common.Kernel
-COPY src/Services/Basket/Basket.API/ src/Services/Basket/Basket.API/
-COPY src/Shared/Common.Kernel/ src/Shared/Common.Kernel/
+COPY . .
 
-RUN dotnet build "src/Services/Basket/Basket.API/Basket.API.csproj" -c ${BUILD_CONFIGURATION} -o /app/build
+WORKDIR /src/src/Services/Basket/Basket.API
+RUN dotnet build "Basket.API.csproj" -c ${BUILD_CONFIGURATION} -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "src/Services/Basket/Basket.API/Basket.API.csproj" -c ${BUILD_CONFIGURATION} -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "Basket.API.csproj" -c ${BUILD_CONFIGURATION} -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app

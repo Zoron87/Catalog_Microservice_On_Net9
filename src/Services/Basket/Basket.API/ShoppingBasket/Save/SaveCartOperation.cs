@@ -15,19 +15,29 @@ public static class SaveCartOperation
         public async Task<SaveCartResult> Handle(SaveCartCommand command, CancellationToken ct)
         {
             var cart = command.Cart;
-
-            foreach (var item in cart.Items)
-            {
-                var getPromoRequest = new GetPromoRequest
-                {
-                    CatalogItemId = item.ItemId.ToString()
-                };
-
-                var discount = await promoService.GetPromoAsync(getPromoRequest, cancellationToken: ct);
-                item.UnitPrice -= (decimal)discount.Value;
-            }
+            await ApplyPromotionsToCartAsync(cart, ct);
             await cartRepository.SaveCartAsync(cart, ct);
             return new SaveCartResult(cart.AccountName);
+        }
+
+        private async Task ApplyPromotionsToCartAsync(ShoppingCart cart, CancellationToken ct)
+        {
+            foreach (var item in cart.Items)
+            {
+                PromoModel discount = await GetDiscountForItemAsync(item, ct);
+                item.UnitPrice -= (decimal)discount.Value;
+            }
+        }
+
+        private async Task<PromoModel> GetDiscountForItemAsync(ShoppingCartItem item, CancellationToken ct)
+        {
+            var getPromoRequest = new GetPromoRequest
+            {
+                CatalogItemId = item.ItemId.ToString()
+            };
+
+            var discount = await promoService.GetPromoAsync(getPromoRequest, cancellationToken: ct);
+            return discount;
         }
     }
 }
