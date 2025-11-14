@@ -12,7 +12,7 @@ services:
         ports:
             - "7101:5432"
         volumes:
-            - postgres_catalog:/var/lib/postgresql/data/
+            - postgres_catalog:/var/lib/postgresql
     
     basket_db:
         container_name: basket-db-dev
@@ -25,7 +25,7 @@ services:
         ports:
             - "7102:5432"
         volumes:
-            - postgres_basket:/var/lib/postgresql/data/
+            - postgres_basket:/var/lib/postgresql
 
     basket_redis:
         container_name: basket-redis-dev
