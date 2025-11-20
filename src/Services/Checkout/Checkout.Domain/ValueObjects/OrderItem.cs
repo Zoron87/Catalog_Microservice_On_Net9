@@ -3,6 +3,6 @@
 public record class OrderItem
 (
     string CatalogItemName,
-    string Quantity,
+    int Quantity,
     decimal UnitPrice
 );
