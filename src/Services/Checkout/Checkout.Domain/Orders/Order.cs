@@ -12,7 +12,7 @@ public class Order : BaseEntity, IAggregateRoot
     public OrderStatus CurrentOrderStatus { get; set; } = OrderStatus.Draft;
     public Contact ContactInfo { get; set; } = default!;
     public Address DeliveryAddress { get; set; } = default!;
-    public PaymentMethod CurrentPatmentMethod { get; set; }
+    public PaymentMethod CurrentPaymentMethod { get; set; }
     public CardDetails? CardDetails { get; set; }
     public PaymentStatus CurrentPaymentStatus { get; set; } = PaymentStatus.Pending;
 }
