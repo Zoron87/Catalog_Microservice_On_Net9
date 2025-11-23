@@ -1,4 +1,6 @@
+using Checkout.Domain.Repositories;
 using Checkout.Infrastructure.Data;
+using Checkout.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace Capi.Infrastructure;
@@ -13,6 +15,9 @@ public static class DependencyInjection
         var pgConnection = configuration.GetConnectionString("PgConnection");
         services.AddDbContext<OrderContext>(options =>
             options.UseNpgsql(pgConnection));
+
+        services.AddScoped<IOrderRepository, OrderRepository>();
+
         return services;
     }
 }
