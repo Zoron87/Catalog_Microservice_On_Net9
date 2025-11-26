@@ -1,5 +1,5 @@
+using Carter;
 using Checkout.Infrastructure.Data.Extensions;
-using System.Threading.Tasks;
 
 namespace Capi.API;
 
@@ -10,6 +10,7 @@ public static class DependencyInjection
         IConfiguration configuration
     )
     {
+        services.AddCarter();
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
 
@@ -20,6 +21,7 @@ public static class DependencyInjection
         this WebApplication app
     )
     {
+        app.MapCarter();
         app.UseSwagger();
         app.UseSwaggerUI();
 
