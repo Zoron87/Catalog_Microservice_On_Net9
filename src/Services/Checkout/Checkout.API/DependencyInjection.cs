@@ -1,5 +1,6 @@
 using Carter;
 using Checkout.Infrastructure.Data.Extensions;
+using Common.Kernel.Exceptions.Handler;
 
 namespace Capi.API;
 
@@ -10,6 +11,7 @@ public static class DependencyInjection
         IConfiguration configuration
     )
     {
+        services.AddExceptionHandler<CustomExceptionHandler>();
         services.AddCarter();
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
@@ -21,6 +23,7 @@ public static class DependencyInjection
         this WebApplication app
     )
     {
+        app.UseExceptionHandler(options => { });
         app.MapCarter();
         app.UseSwagger();
         app.UseSwaggerUI();
