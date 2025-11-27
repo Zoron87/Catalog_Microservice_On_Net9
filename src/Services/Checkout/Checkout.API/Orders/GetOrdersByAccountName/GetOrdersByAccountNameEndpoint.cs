@@ -1,7 +1,7 @@
 ﻿using Carter;
 using Checkout.Application.Orders.Queries.GerOrdersByAccountName;
+using Checkout.Application.Orders.Queries.GerOrdersByAccountName.DTOs;
 using Checkout.Domain.Orders;
-using Common.Kernel.CQRS.Queries;
 using Mapster;
 using MediatR;
 
@@ -9,7 +9,7 @@ namespace Checkout.API.Orders.GetOrdersByAccountName;
 
 public record GetOrdersByAccountNameRequest(string AccountName);
 
-public record GetOrdersByAccountNameResponse(IEnumerable<Order> Orders);
+public record GetOrdersByAccountNameResponse(IEnumerable<OrderDto> Orders);
 
 public class GetOrdersByAccountNameEndpoint : ICarterModule
 {
