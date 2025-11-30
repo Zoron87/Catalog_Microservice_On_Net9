@@ -105,8 +105,44 @@ services:
             condition: service_healthy
         restart: unless-stopped
 
+# Checkout api
+    checkout_db:
+        container_name: checkout-db-prod
+        image: postgres
+        environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=12345678
+            - POSTGRES_DB=checkout-db
+        ports:
+          - "7404:5432"
+        restart: always
+        volumes:
+            - postgres_checkout:/var/lib/postgresql
+        healthcheck:
+            test: ["CMD-SHELL", "pg_isready -U postgres"]
+            interval: 2s
+            timeout: 2s
+            retries: 10
+
+    checkout_api:
+        container_name: checkout-api
+        build:
+            context: .
+            dockerfile: ./src/Services/Checkout/Checkout.API/Dockerfile
+            args:
+              - BUILDKIT_INLINE_CACHE=0
+        ports:
+          - "7304:8080"
+        environment:
+          - ASPNETCORE_ENVIRONMENT=Production
+        depends_on:
+          checkout_db:
+            condition: service_healthy
+        restart: unless-stopped
+
 volumes:
     postgres_catalog:   
     postgres_basket_prod:
     redis_basket_prod:
     mysql_promotion:
+    postgres_checkout:
