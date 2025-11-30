@@ -13,10 +13,10 @@ public class CreateOrderEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapPost("/orders", async ([FromBody] CreateOrderRequest request, ISender sender) =>
+        app.MapPost("/orders", async ([FromBody] CreateOrderRequest request, ISender sender, CancellationToken ct) =>
         {
             var command = new CreateOrderCommand(request.OrderData);
-            var result = await sender.Send(command);
+            var result = await sender.Send(command, ct);
             var response = new CreateOrderResponse(result);
 
             return Results.Created($"/orders/{response.Result.OrderId}", response);

@@ -13,7 +13,7 @@ public class DeleteOrderEndpoint : ICarterModule
     {
         app.MapDelete("/orders", async ([AsParameters] DeleteOrderRequest request, ISender sender, CancellationToken ct) =>
         {
-            var result = await sender.Send(new DeleteOrderCommand(request.OrderId));
+            var result = await sender.Send(new DeleteOrderCommand(request.OrderId), ct);
             var response = new DeleteOrderResponse(result.IsSuccess);
 
             return result.IsSuccess ? Results.Ok(response) : Results.NotFound(response);
