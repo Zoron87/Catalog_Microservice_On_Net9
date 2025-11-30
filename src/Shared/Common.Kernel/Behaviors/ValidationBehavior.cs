@@ -1,5 +1,4 @@
-﻿using Common.Kernel.CQRS.Commands;
-using FluentValidation;
+﻿using FluentValidation;
 using MediatR;
 
 namespace Common.Kernel.Behaviors;
