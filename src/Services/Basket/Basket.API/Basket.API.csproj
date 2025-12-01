@@ -15,6 +15,7 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.6" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Common.Messaging\Common.Messaging.csproj" />
     <ProjectReference Include="..\..\..\Shared\Common.Kernel\Common.Kernel.csproj" />
 	<Protobuf Include="..\..\Promotion\Promotion.Grpc\Protos\promo.proto" GrpcServices="Client" />
   </ItemGroup>

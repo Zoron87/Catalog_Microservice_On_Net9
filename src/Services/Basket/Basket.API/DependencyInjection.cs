@@ -3,7 +3,10 @@ using Basket.API.Models;
 using Carter;
 using Common.Kernel.Behaviors;
 using Common.Kernel.Exceptions.Handler;
+using Common.Messaging.Extensions;
 using FluentValidation;
+using Mapster;
+using MapsterMapper;
 using Marten;
 using Promotion.Grpc.Protos;
 
@@ -58,6 +61,13 @@ public static class DependencyInjection
         {
             option.Address = new Uri(promotionService);
         });
+
+        services.AddBroker(configuration);
+
+        TypeAdapterConfig.GlobalSettings.Scan(assembly);
+        services.AddSingleton(TypeAdapterConfig.GlobalSettings);
+        services.AddScoped<IMapper, ServiceMapper>();
+
         return services;
     }
 

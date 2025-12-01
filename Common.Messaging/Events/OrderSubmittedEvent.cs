@@ -6,7 +6,7 @@ public class OrderSubmittedEvent : BaseIntegrationEvent
 {
     public Guid OrderId { get; set; }
     public string AccountName { get; set; } = default!;
-    public string TotalPrice { get; set; }
+    public decimal TotalPrice { get; set; }
 
     // Контактная информация
     public string FirstName { get; set; } = default!;
@@ -26,5 +26,5 @@ public class OrderSubmittedEvent : BaseIntegrationEvent
     public string? Expiration { get; set; }
     public string? Cvv { get; set; }
 
-    public List<OrderItemEventDto> items { get; set; } = new();
+    public List<OrderItemEventDto> Items { get; set; } = new();
 }
