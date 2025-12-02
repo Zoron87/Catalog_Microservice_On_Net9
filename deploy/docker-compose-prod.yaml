@@ -1,4 +1,4 @@
-#docker compose --project-directory . -f deploy\docker-compose-prod.yaml up -d --build
+# docker compose --project-directory . -f deploy\docker-compose-prod.yaml up -d --build
 
 services:
     catalog_db:
@@ -65,9 +65,14 @@ services:
         environment:
           - ASPNETCORE_ENVIRONMENT=Production
         depends_on:
-          - basket_db
-          - basket_redis
-          - promotion_api
+          basket_db:
+            condition: service_started
+          basket_redis:
+            condition: service_started
+          promotion_api:
+            condition: service_started
+          rabbit_mq:
+            condition: service_started
         restart: unless-stopped
 
 # promotion grpc
@@ -138,7 +143,28 @@ services:
         depends_on:
           checkout_db:
             condition: service_healthy
+          rabbit_mq:
+            condition: service_healthy
         restart: unless-stopped
+
+# Rabbit Mq
+    rabbit_mq:
+        container_name: rabbit-mq-prod
+        image: rabbitmq:3-management
+        environment:
+            - RABBITMQ_DEFAULT_USER=guest
+            - RABBITMQ_DEFAULT_PASSWORD=guest
+        ports:
+          - "5672:5672"
+          - "15672:15672"
+        restart: always
+        volumes:
+            - rabbitmq_data:/var/lib/rabbitmq
+        healthcheck:
+            test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+            interval: 10s
+            timeout: 10s
+            retries: 20
 
 volumes:
     postgres_catalog:   
@@ -146,3 +172,4 @@ volumes:
     redis_basket_prod:
     mysql_promotion:
     postgres_checkout:
+    rabbitmq_data:

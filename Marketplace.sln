@@ -47,7 +47,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Checkout.Domain", "src\Serv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Checkout.Infrastructure", "src\Services\Checkout\Checkout.Infrastructure\Checkout.Infrastructure.csproj", "{D504D7F6-3908-4620-83E2-82CAC6684AC9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Messaging", "Common.Messaging\Common.Messaging.csproj", "{E0682B82-E677-47EE-B0A8-2307E5B1B217}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Messaging", "src\Shared\Common.Messaging\Common.Messaging.csproj", "{E0682B82-E677-47EE-B0A8-2307E5B1B217}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

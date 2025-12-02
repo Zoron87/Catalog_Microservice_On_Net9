@@ -1,7 +1,9 @@
 using Checkout.Domain.Repositories;
 using Checkout.Infrastructure.Data;
 using Checkout.Infrastructure.Repositories;
+using Common.Messaging.Extensions;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace Capi.Infrastructure;
 
@@ -17,6 +19,8 @@ public static class DependencyInjection
             options.UseNpgsql(pgConnection));
 
         services.AddScoped<IOrderRepository, OrderRepository>();
+
+        services.AddBroker(configuration, Assembly.GetExecutingAssembly());
 
         return services;
     }

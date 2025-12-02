@@ -17,17 +17,18 @@ WORKDIR /src
 COPY ["src/Services/Checkout/Checkout.API/Checkout.API.csproj", "src/Services/Checkout/Checkout.API/"]
 COPY ["src/Services/Checkout/Checkout.Application/Checkout.Application.csproj", "src/Services/Checkout/Checkout.Application/"]
 COPY ["src/Shared/Common.Kernel/Common.Kernel.csproj", "src/Shared/Common.Kernel/"]
+COPY ["src/Shared/Common.Messaging/Common.Messaging.csproj", "src/Shared/Common.Messaging/"]
 COPY ["src/Services/Checkout/Checkout.Domain/Checkout.Domain.csproj", "src/Services/Checkout/Checkout.Domain/"]
 COPY ["src/Services/Checkout/Checkout.Infrastructure/Checkout.Infrastructure.csproj", "src/Services/Checkout/Checkout.Infrastructure/"]
 RUN dotnet restore "./src/Services/Checkout/Checkout.API/Checkout.API.csproj"
 COPY . .
 WORKDIR "/src/src/Services/Checkout/Checkout.API"
-RUN dotnet build "./Checkout.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet build "Checkout.API.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # This stage is used to publish the service project to be copied to the final stage
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./Checkout.API.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "Checkout.API.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 # This stage is used in production or when running from VS in regular mode (Default when not using the Debug configuration)
 FROM base AS final
