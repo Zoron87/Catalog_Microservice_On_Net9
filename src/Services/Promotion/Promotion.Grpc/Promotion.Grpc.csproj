@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Common.Logging\Common.Logging.csproj" />
     <ProjectReference Include="..\..\..\Shared\Common.Kernel\Common.Kernel.csproj" />
 	<Protobuf Include="Protos\promo.proto" GrpcServices="Server" />
   </ItemGroup>

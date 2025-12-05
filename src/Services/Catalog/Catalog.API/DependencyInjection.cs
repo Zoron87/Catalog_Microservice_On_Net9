@@ -1,5 +1,7 @@
 using Asp.Versioning;
 using Catalog.Application.Queries.BrandQueries;
+using Common.Logging.Extensions;
+using Common.Logging.Middleware;
 
 namespace Catalog.API;
 public static class DependencyInjection
@@ -45,11 +47,14 @@ public static class DependencyInjection
             cfg.RegisterServicesFromAssemblyContaining<GetBrandsQuery>();
         });
 
+        services.AddCommonLogging(configuration);
+
         return services;
     }
 
     public static WebApplication UseApiServices(this WebApplication app)
     {
+        app.UseMiddleware<RequestLoggingMiddleware>();
         app.MapControllers();
         //if (app.Environment.IsDevelopment())
         {

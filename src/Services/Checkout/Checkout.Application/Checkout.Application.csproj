@@ -1,5 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Common.Logging\Common.Logging.csproj" />
     <ProjectReference Include="..\..\..\Shared\Common.Kernel\Common.Kernel.csproj" />
     <ProjectReference Include="..\Checkout.Domain\Checkout.Domain.csproj" />
   </ItemGroup>

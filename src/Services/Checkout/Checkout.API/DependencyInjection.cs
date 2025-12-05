@@ -1,6 +1,8 @@
 using Carter;
 using Checkout.Infrastructure.Data.Extensions;
 using Common.Kernel.Exceptions.Handler;
+using Common.Logging.Extensions;
+using Common.Logging.Middleware;
 
 namespace Capi.API;
 
@@ -16,6 +18,8 @@ public static class DependencyInjection
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
 
+        services.AddCommonLogging(configuration);
+
         return services;
     }
 
@@ -23,6 +27,7 @@ public static class DependencyInjection
         this WebApplication app
     )
     {
+        app.UseMiddleware<RequestLoggingMiddleware>();
         app.UseExceptionHandler(options => { });
         app.MapCarter();
         app.UseSwagger();

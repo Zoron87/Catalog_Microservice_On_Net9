@@ -1,6 +1,8 @@
 using Basket.API;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Host.UseSerilog();
 
 // Add services to the container.
 builder.Services.AddRazorPages();

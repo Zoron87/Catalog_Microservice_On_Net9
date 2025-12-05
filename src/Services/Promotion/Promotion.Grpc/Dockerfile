@@ -15,6 +15,8 @@ ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["src/Services/Promotion/Promotion.Grpc/Promotion.Grpc.csproj", "src/Services/Promotion/Promotion.Grpc/"]
 COPY ["src/Shared/Common.Kernel/Common.Kernel.csproj", "src/Shared/Common.Kernel/"]
+COPY ["src/Shared/Common.Logging/Common.Logging.csproj", "src/Shared/Common.Logging/"]
+
 RUN dotnet restore "./src/Services/Promotion/Promotion.Grpc/Promotion.Grpc.csproj"
 COPY . .
 WORKDIR "/src/src/Services/Promotion/Promotion.Grpc"

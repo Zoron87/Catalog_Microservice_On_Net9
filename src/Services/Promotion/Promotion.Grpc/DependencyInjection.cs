@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Components.Forms;
+﻿using Common.Logging.Extensions;
+using Microsoft.AspNetCore.Components.Forms;
 using MySqlConnector;
 using Promotion.Grpc.Configuration;
+using Promotion.Grpc.Interceptors;
 using Promotion.Grpc.Persistance.Extensions;
 using Promotion.Grpc.Persistance.Interfaces;
 using Promotion.Grpc.Persistance.Repositories;
@@ -18,7 +20,13 @@ public static class DependencyInjection
         services.AddScoped<IDbConnection>(_ =>
                 new MySqlConnection(mySqlConnection));
 
-        services.AddGrpc();
+        services.AddSingleton<RequestLoggingInterceptor>();
+        services.AddGrpc(options =>
+        {
+            options.Interceptors.Add<RequestLoggingInterceptor>();
+            options.EnableDetailedErrors = true;
+        });
+        services.AddCommonLogging(configuration);
         services.AddGrpcReflection();
 
         var assembly = typeof(Program).Assembly;
