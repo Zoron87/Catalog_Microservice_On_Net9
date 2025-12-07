@@ -1,6 +1,6 @@
 ﻿using Common.Logging.Extensions;
-using Microsoft.AspNetCore.Components.Forms;
 using MySqlConnector;
+using Prometheus;
 using Promotion.Grpc.Configuration;
 using Promotion.Grpc.Interceptors;
 using Promotion.Grpc.Persistance.Extensions;
@@ -8,7 +8,6 @@ using Promotion.Grpc.Persistance.Interfaces;
 using Promotion.Grpc.Persistance.Repositories;
 using Promotion.Grpc.Services;
 using System.Data;
-using System.Threading.Tasks;
 
 namespace Promotion.Grpc;
 
@@ -46,6 +45,7 @@ public static class DependencyInjection
 
     public static async Task<WebApplication> UseApiServices(this WebApplication app)
     {
+        app.UseMetricServer();
         using var scope = app.Services.CreateScope();
         var connection = scope.ServiceProvider.GetRequiredService<IDbConnection>();
         var logger = app.Services.GetRequiredService<ILogger<Program>>();

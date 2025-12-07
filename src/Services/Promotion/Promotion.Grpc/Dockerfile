@@ -16,6 +16,7 @@ WORKDIR /src
 COPY ["src/Services/Promotion/Promotion.Grpc/Promotion.Grpc.csproj", "src/Services/Promotion/Promotion.Grpc/"]
 COPY ["src/Shared/Common.Kernel/Common.Kernel.csproj", "src/Shared/Common.Kernel/"]
 COPY ["src/Shared/Common.Logging/Common.Logging.csproj", "src/Shared/Common.Logging/"]
+COPY ["src/Shared/Common.Metrics/Common.Metrics.csproj", "src/Shared/Common.Metrics/"]
 
 RUN dotnet restore "./src/Services/Promotion/Promotion.Grpc/Promotion.Grpc.csproj"
 COPY . .

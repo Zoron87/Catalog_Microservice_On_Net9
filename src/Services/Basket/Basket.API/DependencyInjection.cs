@@ -6,6 +6,7 @@ using Common.Kernel.Exceptions.Handler;
 using Common.Logging.Extensions;
 using Common.Logging.Middleware;
 using Common.Messaging.Extensions;
+using Common.Metrics.Extensions;
 using FluentValidation;
 using Mapster;
 using MapsterMapper;
@@ -77,6 +78,7 @@ public static class DependencyInjection
 
     public static WebApplication UseApiServices(this WebApplication app)
     {
+        app.UsePrometheusMetrics();
         app.UseMiddleware<RequestLoggingMiddleware>();
         app.UseExceptionHandler(option => { });
         app.MapCarter();

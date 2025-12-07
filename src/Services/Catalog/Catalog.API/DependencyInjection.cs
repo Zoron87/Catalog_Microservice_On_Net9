@@ -2,6 +2,7 @@ using Asp.Versioning;
 using Catalog.Application.Queries.BrandQueries;
 using Common.Logging.Extensions;
 using Common.Logging.Middleware;
+using Common.Metrics.Extensions;
 
 namespace Catalog.API;
 public static class DependencyInjection
@@ -54,6 +55,7 @@ public static class DependencyInjection
 
     public static WebApplication UseApiServices(this WebApplication app)
     {
+        app.UsePrometheusMetrics();
         app.UseMiddleware<RequestLoggingMiddleware>();
         app.MapControllers();
         //if (app.Environment.IsDevelopment())

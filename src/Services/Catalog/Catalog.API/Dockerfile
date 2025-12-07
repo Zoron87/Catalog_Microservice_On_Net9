@@ -14,6 +14,7 @@ COPY ["src/Services/Catalog/Catalog.Application/Catalog.Application.csproj", "sr
 COPY ["src/Services/Catalog/Catalog.Domain/Catalog.Domain.csproj", "src/Services/Catalog/Catalog.Domain/"]
 COPY ["src/Services/Catalog/Catalog.Infrastructure/Catalog.Infrastructure.csproj", "src/Services/Catalog/Catalog.Infrastructure/"]
 COPY ["src/Shared/Common.Logging/Common.Logging.csproj", "src/Shared/Common.Logging/"]
+COPY ["src/Shared/Common.Metrics/Common.Metrics.csproj", "src/Shared/Common.Metrics/"]
 
 RUN dotnet restore "src/Services/Catalog/Catalog.API/Catalog.API.csproj"
 

@@ -49,7 +49,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Checkout.Infrastructure", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Messaging", "src\Shared\Common.Messaging\Common.Messaging.csproj", "{E0682B82-E677-47EE-B0A8-2307E5B1B217}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Logging", "Common.Logging\Common.Logging.csproj", "{B76D900C-A7F1-4D3F-BC69-34D6FB5DA2B4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Logging", "src\Shared\Common.Logging\Common.Logging.csproj", "{B76D900C-A7F1-4D3F-BC69-34D6FB5DA2B4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "prometheus", "prometheus", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
+	ProjectSection(SolutionItems) = preProject
+		prometheus\prometheus.yml = prometheus\prometheus.yml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Metrics", "src\Shared\Common.Metrics\Common.Metrics.csproj", "{FDE743A1-54B4-4989-83FD-2A1B5F86EF5F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -113,6 +120,10 @@ Global
 		{B76D900C-A7F1-4D3F-BC69-34D6FB5DA2B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B76D900C-A7F1-4D3F-BC69-34D6FB5DA2B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B76D900C-A7F1-4D3F-BC69-34D6FB5DA2B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDE743A1-54B4-4989-83FD-2A1B5F86EF5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDE743A1-54B4-4989-83FD-2A1B5F86EF5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDE743A1-54B4-4989-83FD-2A1B5F86EF5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDE743A1-54B4-4989-83FD-2A1B5F86EF5F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -137,6 +148,7 @@ Global
 		{D504D7F6-3908-4620-83E2-82CAC6684AC9} = {3931C894-4543-4B67-8C3C-552C343255AA}
 		{E0682B82-E677-47EE-B0A8-2307E5B1B217} = {34CB5D01-B906-4655-8686-88E250C2633C}
 		{B76D900C-A7F1-4D3F-BC69-34D6FB5DA2B4} = {34CB5D01-B906-4655-8686-88E250C2633C}
+		{FDE743A1-54B4-4989-83FD-2A1B5F86EF5F} = {34CB5D01-B906-4655-8686-88E250C2633C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1FBCF6EC-1D4E-40A7-A3B2-14AE0AD05E11}

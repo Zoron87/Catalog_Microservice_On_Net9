@@ -26,7 +26,10 @@ services:
         environment:
           - ASPNETCORE_ENVIRONMENT=Production
         depends_on:
-          - catalog_db
+            catalog_db:
+                condition: service_started
+            elasticsearch:
+                condition: service_healthy
         restart: unless-stopped
 
 # basket.api
@@ -73,6 +76,8 @@ services:
             condition: service_started
           rabbit_mq:
             condition: service_started
+          elasticsearch:
+            condition: service_healthy
         restart: unless-stopped
 
 # promotion grpc
@@ -107,6 +112,8 @@ services:
           - ASPNETCORE_ENVIRONMENT=Production
         depends_on:
           promotion_db:
+            condition: service_healthy
+          elasticsearch:
             condition: service_healthy
         restart: unless-stopped
 
@@ -145,6 +152,8 @@ services:
             condition: service_healthy
           rabbit_mq:
             condition: service_healthy
+          elasticsearch:
+            condition: service_healthy
         restart: unless-stopped
 
 # Rabbit Mq
@@ -166,6 +175,70 @@ services:
             timeout: 10s
             retries: 20
 
+    elasticsearch:
+        container_name: elasticsearch-prod
+        image: elasticsearch:9.0.3
+        environment:
+          - node.name=elasticsearch-prod
+          - cluster.name=es-docker-cluster-prod
+          - discovery.type=single-node
+          - bootstrap.memory_lock=true
+          - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+          - xpack.security.enabled=false
+          - xpack.security.enrollment.enabled=false
+          - action.auto_create_index=true
+          - cluster.routing.allocation.disk.threshold_enabled=false
+        ulimits:
+          memlock:
+            soft: -1
+            hard: -1
+          nofile:
+            soft: 65536
+            hard: 65536
+        volumes:
+          - elasticsearch_data:/usr/share/elasticsearch/data
+        ports:
+          - "9200:9200"
+        restart: always
+        healthcheck:
+          test: ["CMD-SHELL", "curl -f http://localhost:9200/_cluster/health || exit 1"]
+          interval: 30s
+          timeout: 10s
+          retries: 5
+
+    kibana:
+        container_name: kibana-prod
+        image: kibana:9.0.3
+        environment:
+          - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+          - SERVER_NAME=kibana-prod
+          - SERVER_HOST=0.0.0.0
+          - ELASTICSEARCH_USERNAME=
+          - ELASTICSEARCH_PASSWORD=
+        ports:
+          - "5601:5601"
+        depends_on:
+          elasticsearch:
+            condition: service_healthy
+        restart: always
+
+    prometheus:
+        image: prom/prometheus
+        volumes:
+          - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+          - prometheus_data:/prometheus
+        ports:
+          - "9090:9090"
+
+    grafana:
+        image: grafana/grafana
+        ports:
+          - "3000:3000"
+        environment:
+          - GF_SECURITY_ADMIN_PASSWORD=admin
+        volumes:
+          - grafana_data:/var/lib/grafana
+
 volumes:
     postgres_catalog:   
     postgres_basket_prod:
@@ -173,3 +246,6 @@ volumes:
     mysql_promotion:
     postgres_checkout:
     rabbitmq_data:
+    elasticsearch_data:
+    prometheus_data:
+    grafana_data:
